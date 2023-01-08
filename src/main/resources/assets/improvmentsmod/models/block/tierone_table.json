@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "minecraft:block/oak_planks",
+    "east": "improvmentsmod:block/tier1_table_side",
+    "north": "improvmentsmod:block/tier1_table_front",
+    "particle": "improvmentsmod:block/tier1_table_front",
+    "south": "improvmentsmod:block/tier1_table_side",
+    "up": "improvmentsmod:block/tier1_table_top",
+    "west": "improvmentsmod:block/tier1_table_front"
+  }
+}

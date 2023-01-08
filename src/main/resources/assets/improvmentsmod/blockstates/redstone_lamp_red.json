@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "lit=true": { "model": "improvmentsmod:block/redstone_lamp_red_on" },
+    "lit=false": { "model": "improvmentsmod:block/redstone_lamp_red_off" }
+  }
+}

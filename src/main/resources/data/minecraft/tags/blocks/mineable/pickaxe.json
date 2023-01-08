@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "improvmentsmod:zircon_ore",
+    "improvmentsmod:zircon_block",
+    "improvmentsmod:deepslate_zircon_ore",
+
+    "improvmentsmod:nether_coal_ore",
+    "improvmentsmod:nether_iron_ore",
+    "improvmentsmod:nether_diamond_ore",
+    "improvmentsmod:nether_emerald_ore",
+    "improvmentsmod:nether_redstone_ore",
+    "improvmentsmod:nether_lapis_ore",
+    "improvmentsmod:nether_copper_ore",
+    "improvmentsmod:deepslate_quartz_ore",
+    "improvmentsmod:quartz_ore",
+    "improvmentsmod:temp"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "replace": true,
+  "item.improvmentsmod.zircon": "Zircon",
+  "item.improvmentsmod.raw_zircon": "Raw Zircon",
+
+  "item.dyed": "Dyed Test",
+
+  "block.improvmentsmod.zircon_block": "Block of Zircon",
+  "block.improvmentsmod.zircon_ore": "Zircon Ore",
+  "block.improvmentsmod.deepslate_zircon_ore": "Deepslate Zircon Ore",
+  "block.improvmentsmod.endstone_zircon_ore": "End Zircon Ore",
+  "block.improvmentsmod.netherrack_zircon_ore": "Nether Zircon Ore",
+
+  "itemGroup.improvmentstab": "Improvments Tab",
+  "entity.minecraft.villager.improvmentsmod.cauldron_master": "Cauldron Master",
+
+  "item.improvmentsmod.regeneration_bucket": "Bucket of Regeneration",
+
+  "block.improvmentsmod.temp": "Temp",
+  "block.improvmentsmod.tierone_table": "Tier 1 Workbench",
+  "block.improvmentsmod.quartz_ore": "Quartz Ore",
+  "block.improvmentsmod.deepslate_quartz_ore": "Deepslate Quartz Ore",
+  "block.improvmentsmod.nether_coal_ore": "Nether Coal Ore",
+  "block.improvmentsmod.nether_iron_ore": "Nether Iron Ore",
+  "block.improvmentsmod.nether_diamond_ore": "Nether Diamond Ore",
+  "block.improvmentsmod.nether_emerald_ore": "Nether Emerald Ore",
+  "block.improvmentsmod.nether_redstone_ore": "Nether Redstone Ore",
+  "block.improvmentsmod.nether_lapis_ore": "Nether Lapis Ore",
+  "block.improvmentsmod.nether_copper_ore": "Nether Copper Ore",
+  "block.improvmentsmod.redstone_lamp_red": "Red Redstone Lamp",
+
+  "key.category.inpromentsmod.tutorial": "Test Mod",
+  "key,improvmentsmod.test": "Test"
+}
