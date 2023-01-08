@@ -16,7 +16,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 
-public class CraftingMenu2 extends RecipeBookMenu<CraftingContainer> {
+public class TierOneMenu extends RecipeBookMenu<CraftingContainer> {
     public static final int RESULT_SLOT = 0;
     private static final int CRAFT_SLOT_START = 1;
     private static final int CRAFT_SLOT_END = 10;
@@ -29,11 +29,11 @@ public class CraftingMenu2 extends RecipeBookMenu<CraftingContainer> {
     private final ContainerLevelAccess access;
     private final Player player;
 
-    public CraftingMenu2(int pContainerId, Inventory pPlayerInventory) {
+    public TierOneMenu(int pContainerId, Inventory pPlayerInventory) {
         this(pContainerId, pPlayerInventory, ContainerLevelAccess.NULL);
     }
 
-    public CraftingMenu2(int pContainerId, Inventory pPlayerInventory, ContainerLevelAccess pAccess) {
+    public TierOneMenu(int pContainerId, Inventory pPlayerInventory, ContainerLevelAccess pAccess) {
         super(MenuType.CRAFTING, pContainerId);
         this.access = pAccess;
         this.player = pPlayerInventory.player;

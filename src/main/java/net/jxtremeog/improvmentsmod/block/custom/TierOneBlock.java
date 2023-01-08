@@ -1,98 +1,25 @@
 package net.jxtremeog.improvmentsmod.block.custom;
 
-import net.jxtremeog.improvmentsmod.block.entity.TierOneBlockEntity;
-import net.jxtremeog.improvmentsmod.block.entity.ModBlockEntities;
+import net.jxtremeog.improvmentsmod.screen.TierOneScreen;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.CraftingTableBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.network.NetworkHooks;
-import org.jetbrains.annotations.Nullable;
 
-    public class TierOneBlock extends BaseEntityBlock {
-        public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+public class TierOneBlock extends CraftingTableBlock {
+    private static final Component GUI_TITLE = Component.translatable("container.crafting");
 
-        public TierOneBlock(Properties properties) {
-            super(properties);
-        }
-        @Override
-        public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-            return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
-        }
-        @Override
-        public BlockState rotate(BlockState pState, Rotation pRotation) {
-            return pState.setValue(FACING, pRotation.rotate(pState.getValue(FACING)));
-        }
-        @Override
-        public BlockState mirror(BlockState pState, Mirror pMirror) {
-            return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
-        }
-        @Override
-        protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-            builder.add(FACING);
-        }
-
-        /* BLOCK ENTITY */
-
-        @Override
-        public RenderShape getRenderShape(BlockState p_49232_) {
-            return RenderShape.MODEL;
-        }
-
-        @Override
-        public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
-            if (pState.getBlock() != pNewState.getBlock()) {
-                BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-                if (blockEntity instanceof TierOneBlockEntity) {
-                    ((TierOneBlockEntity) blockEntity).drops();
-                }
-            }
-            super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
-        }
-
-        @Override
-        public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos,
-                                     Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-            if (!pLevel.isClientSide()) {
-                BlockEntity entity = pLevel.getBlockEntity(pPos);
-                if(entity instanceof TierOneBlockEntity) {
-                    NetworkHooks.openScreen(((ServerPlayer)pPlayer), (MenuProvider) entity, pPos);
-                } else {
-                    throw new IllegalStateException("Our Container provider is missing!");
-                }
-            }
-
-            return InteractionResult.sidedSuccess(pLevel.isClientSide());
-        }
-
-        @Nullable
-        @Override
-        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-            return new TierOneBlockEntity(pos, state);
-        }
-
-        @Nullable
-        @Override
-        public <T1 extends BlockEntity> BlockEntityTicker<T1> getTicker(Level level, BlockState state,
-                                                                      BlockEntityType<T1> type) {
-            return createTickerHelper(type, ModBlockEntities.TIERONE.get(),
-                    TierOneBlockEntity::tick);
-        }
+    public TierOneBlock(BlockBehaviour.Properties properties) {
+        super(properties);
     }
+
+    public MenuProvider getMenuProvider(BlockState state, Level worldIn, BlockPos pos) {
+        return new SimpleMenuProvider((id, inventory, entity) -> new TierOneScreen(id, inventory, ContainerLevelAccess.create((Level)worldIn, (BlockPos)pos), (Block)this), GUI_TITLE);
+    }
+}

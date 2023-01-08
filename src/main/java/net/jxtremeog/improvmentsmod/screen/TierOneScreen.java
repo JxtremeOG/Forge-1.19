@@ -5,11 +5,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.level.block.Block;
 
-public class CraftingScreen extends CraftingMenu2 {
+public class TierOneScreen extends TierOneMenu {
     private final Block workbench;
     private final ContainerLevelAccess worldPos;
 
-    public CraftingScreen(int id, Inventory playerInv, ContainerLevelAccess worldPos, Block workbench) {
+    public TierOneScreen(int id, Inventory playerInv, ContainerLevelAccess worldPos, Block workbench) {
         super(id, playerInv, worldPos);
         this.workbench = workbench;
         this.worldPos = worldPos;
@@ -21,6 +21,6 @@ public class CraftingScreen extends CraftingMenu2 {
     }
 
     public boolean stillValid(Player playerIn) {
-        return CraftingScreen.isWithinUsableDistance(this.worldPos, playerIn, this.workbench);
+        return TierOneScreen.isWithinUsableDistance(this.worldPos, playerIn, this.workbench);
     }
 }

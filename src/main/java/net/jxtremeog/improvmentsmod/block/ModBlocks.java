@@ -30,7 +30,7 @@ public class ModBlocks {
             () -> new TempBlock(BlockBehaviour.Properties.of(Material.METAL)
                     .strength(6f).requiresCorrectToolForDrops()), ModCreativeModeTab.IMPROVMENTS_TAB);
     public static final RegistryObject<Block> TIERONE = registerBlock("tierone_table",
-            () -> new CraftingBlock(BlockBehaviour.Properties.of(Material.METAL)
+            () -> new TierOneBlock(BlockBehaviour.Properties.of(Material.METAL)
                     .strength(6f).requiresCorrectToolForDrops()), ModCreativeModeTab.IMPROVMENTS_TAB);
     public static final RegistryObject<Block> TIERTWO = registerBlock("tiertwo_table",
             () -> new TierTwoBlock(BlockBehaviour.Properties.of(Material.METAL)
