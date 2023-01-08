@@ -3,7 +3,6 @@ package net.jxtremeog.improvmentsmod.screen;
 import java.util.Optional;
 
 import net.jxtremeog.improvmentsmod.recipe.TierOneRecipe;
-import net.jxtremeog.improvmentsmod.recipe.WorkbenchOneRecipe;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;

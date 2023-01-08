@@ -13,8 +13,8 @@ public class ModRecipes {
 
     public static final RegistryObject<RecipeSerializer<TempRecipe>> TEMP_SERIALIZER =
             SERIALIZERS.register("testing", () -> TempRecipe.Serializer.INSTANCE);
-    public static final RegistryObject<RecipeSerializer<WorkbenchOneRecipe>> WORKBENCH_ONE_SERIALIZER =
-            SERIALIZERS.register("oneing", () -> WorkbenchOneRecipe.Serializer.INSTANCE);
+    public static final RegistryObject<RecipeSerializer<TierOneRecipe>> WORKBENCH_ONE_SERIALIZER =
+            SERIALIZERS.register("workbench_one", () -> TierOneRecipe.Serializer.WORKBENCH_ONE);
 
     public static void register(IEventBus eventBus){
         SERIALIZERS.register(eventBus);
