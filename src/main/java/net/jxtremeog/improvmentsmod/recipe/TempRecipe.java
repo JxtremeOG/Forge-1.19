@@ -30,7 +30,6 @@ public class TempRecipe implements Recipe<SimpleContainer> {
         if(pLevel.isClientSide()){
             return false;
         }
-
         return recipeItems.get(0).test(pContainer.getItem(1));
     }
 

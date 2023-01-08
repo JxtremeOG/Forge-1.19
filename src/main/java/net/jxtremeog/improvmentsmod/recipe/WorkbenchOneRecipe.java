@@ -7,6 +7,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -32,8 +33,7 @@ public class WorkbenchOneRecipe implements Recipe<CraftingContainer> {
         if(pLevel.isClientSide()){
             return false;
         }
-
-
+        System.out.println(recipeItems.get(0).test(pContainer.getItem(1)));
         return recipeItems.get(0).test(pContainer.getItem(1));
     }
 

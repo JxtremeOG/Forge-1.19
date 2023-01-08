@@ -156,7 +156,7 @@ public class TempBlockEntity extends BlockEntity implements MenuProvider {
 
         Optional<TempRecipe> recipe = level.getRecipeManager()
                 .getRecipeFor(TempRecipe.Type.INSTANCE, inventory, level);
-
+        System.out.println(recipe);
         if(hasRecipe(pEntity)) {
             pEntity.itemHandler.extractItem(1, 1, false);
             pEntity.itemHandler.setStackInSlot(2, new ItemStack(recipe.get().getResultItem().getItem(),
@@ -175,7 +175,7 @@ public class TempBlockEntity extends BlockEntity implements MenuProvider {
 
         Optional<TempRecipe> recipe = level.getRecipeManager()
                 .getRecipeFor(TempRecipe.Type.INSTANCE, inventory, level);
-
+        System.out.println(recipe);
         return recipe.isPresent() && canInsertAmountIntoOutputSlot(inventory) &&
                 canInsertItemIntoOutputSlot(inventory, recipe.get().getResultItem());
     }

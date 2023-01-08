@@ -12,6 +12,7 @@ import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
@@ -29,10 +30,11 @@ public class TierOneRecipe implements Recipe<CraftingContainer> {
 
     @Override
     public boolean matches(CraftingContainer pContainer, Level pLevel) {
+
         if(pLevel.isClientSide()){
             return false;
         }
-
+        System.out.println(recipeItems.get(0).test(pContainer.getItem(4)));
         return recipeItems.get(0).test(pContainer.getItem(4));
     }
 

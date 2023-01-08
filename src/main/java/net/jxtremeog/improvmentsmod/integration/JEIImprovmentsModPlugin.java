@@ -7,6 +7,7 @@ import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.jxtremeog.improvmentsmod.ImprovmentsMod;
 import net.jxtremeog.improvmentsmod.recipe.TempRecipe;
+import net.jxtremeog.improvmentsmod.recipe.TierOneRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -19,6 +20,8 @@ public class JEIImprovmentsModPlugin implements IModPlugin {
 
     public static RecipeType<TempRecipe> TEMP_TYPE =
             new RecipeType<>(TempRecipeCategory.UID, TempRecipe.class);
+    public static RecipeType<TierOneRecipe> TIER_ONE_TYPE =
+            new RecipeType<>(TierOneRecipeCategory.UID, TierOneRecipe.class);
     @Override
     public ResourceLocation getPluginUid() {
         return new ResourceLocation(ImprovmentsMod.MOD_ID,"jei_plugin");
@@ -35,5 +38,7 @@ public class JEIImprovmentsModPlugin implements IModPlugin {
         RecipeManager rm = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
         List<TempRecipe> recipesInfusing = rm.getAllRecipesFor(TempRecipe.Type.INSTANCE);
         registration.addRecipes(TEMP_TYPE, recipesInfusing);
+        List<TierOneRecipe> recipiesTierOne = rm.getAllRecipesFor(TierOneRecipe.Type.WORKBENCH_ONE);
+        registration.addRecipes(TIER_ONE_TYPE, recipiesTierOne);
     }
 }

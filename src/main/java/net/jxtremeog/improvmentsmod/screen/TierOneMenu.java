@@ -66,13 +66,13 @@ public class TierOneMenu extends RecipeBookMenu<CraftingContainer> {
             ServerPlayer serverplayer = (ServerPlayer)pPlayer;
             ItemStack itemstack = ItemStack.EMPTY;
             //RECIPE
-            Optional<WorkbenchOneRecipe> optional = pLevel.getServer().getRecipeManager().getRecipeFor(WorkbenchOneRecipe.Type.INSTANCE, pContainer, pLevel);
+            Optional<CraftingRecipe> optional = pLevel.getServer().getRecipeManager().getRecipeFor(RecipeType.CRAFTING, pContainer, pLevel);
             System.out.println(optional);
             if (optional.isPresent() && (optional.get().getId() + "").contains("tier_one")) {
 
                 System.out.println(optional.get().getId());
 
-                WorkbenchOneRecipe craftingrecipe = optional.get();
+                CraftingRecipe craftingrecipe = optional.get();
                 if (pResult.setRecipeUsed(pLevel, serverplayer, craftingrecipe)) {
                     //RESULT
                     itemstack = craftingrecipe.assemble(pContainer);
