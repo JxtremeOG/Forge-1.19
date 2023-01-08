@@ -4,6 +4,7 @@ import net.jxtremeog.improvmentsmod.ImprovmentsMod;
 import net.jxtremeog.improvmentsmod.block.custom.RedstoneLampColoredBlock;
 import net.jxtremeog.improvmentsmod.block.custom.TempBlock;
 import net.jxtremeog.improvmentsmod.block.custom.TierOneBlock;
+import net.jxtremeog.improvmentsmod.block.custom.TierTwoBlock;
 import net.jxtremeog.improvmentsmod.fluid.ModFluids;
 import net.jxtremeog.improvmentsmod.fluid.custom.RegenerationFluid;
 import net.jxtremeog.improvmentsmod.item.ModCreativeModeTab;
@@ -33,6 +34,9 @@ public class ModBlocks {
                     .strength(6f).requiresCorrectToolForDrops()), ModCreativeModeTab.IMPROVMENTS_TAB);
     public static final RegistryObject<Block> TIERONE = registerBlock("tierone_table",
             () -> new TierOneBlock(BlockBehaviour.Properties.of(Material.METAL)
+                    .strength(6f).requiresCorrectToolForDrops()), ModCreativeModeTab.IMPROVMENTS_TAB);
+    public static final RegistryObject<Block> TIERTWO = registerBlock("tiertwo_table",
+            () -> new TierTwoBlock(BlockBehaviour.Properties.of(Material.METAL)
                     .strength(6f).requiresCorrectToolForDrops()), ModCreativeModeTab.IMPROVMENTS_TAB);
     //Quartz Ore
     public static final RegistryObject<Block> QUARTZ_ORE = registerBlock("quartz_ore",

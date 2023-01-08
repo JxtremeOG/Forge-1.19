@@ -20,6 +20,10 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("tier_one", () ->
                     BlockEntityType.Builder.of(TierOneBlockEntity::new,
                             ModBlocks.TIERONE.get()).build(null));
+    public static final RegistryObject<BlockEntityType<TierTwoBlockEntity>> TIERTWO =
+            BLOCK_ENTITIES.register("tier_two", () ->
+                    BlockEntityType.Builder.of(TierTwoBlockEntity::new,
+                            ModBlocks.TIERTWO.get()).build(null));
 
     public static void register(IEventBus eventBus){
         BLOCK_ENTITIES.register(eventBus);

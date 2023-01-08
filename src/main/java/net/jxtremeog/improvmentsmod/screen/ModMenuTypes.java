@@ -18,6 +18,8 @@ public class ModMenuTypes {
             registerMenuType(TempMenu::new, "temp_menu");
     public static final RegistryObject<MenuType<TierOneMenu>> TIERONE_MENU =
             registerMenuType(TierOneMenu::new, "tierone_menu");
+    public static final RegistryObject<MenuType<TierTwoMenu>> TIERTWO_MENU =
+            registerMenuType(TierTwoMenu::new, "tiertwo_menu");
 
 
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(IContainerFactory<T> factory,
