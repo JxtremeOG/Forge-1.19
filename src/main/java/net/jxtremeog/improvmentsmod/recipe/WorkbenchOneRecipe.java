@@ -7,36 +7,38 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
-import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.inventory.CraftingContainer;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 
-public class TierTwoRecipe implements Recipe<SimpleContainer> {
+public class WorkbenchOneRecipe implements Recipe<CraftingContainer> {
     private final ResourceLocation id;
     private final ItemStack output;
     private final NonNullList<Ingredient> recipeItems;
 
-    public TierTwoRecipe(ResourceLocation id, ItemStack output,
-                                    NonNullList<Ingredient> recipeItems) {
+    public WorkbenchOneRecipe(ResourceLocation id, ItemStack output,
+                              NonNullList<Ingredient> recipeItems){
         this.id = id;
         this.output = output;
         this.recipeItems = recipeItems;
     }
 
     @Override
-    public boolean matches(SimpleContainer pContainer, Level pLevel) {
+    public boolean matches(CraftingContainer pContainer, Level pLevel) {
         if(pLevel.isClientSide()){
             return false;
         }
 
-        return recipeItems.get(0).test(pContainer.getItem(4));
+
+        return recipeItems.get(0).test(pContainer.getItem(1));
     }
 
     @Override
-    public ItemStack assemble(SimpleContainer pContainer) {
+    public ItemStack assemble(CraftingContainer pContainer) {
         return output;
     }
 
@@ -65,33 +67,34 @@ public class TierTwoRecipe implements Recipe<SimpleContainer> {
         return Type.INSTANCE;
     }
 
-    public static class Type implements RecipeType<TierTwoRecipe> {
+    public static class Type implements RecipeType<WorkbenchOneRecipe> {
         private Type() { }
         public static final Type INSTANCE = new Type();
-        public static final String ID = "workbench_two_shaped";
+        public static final String ID = "oneing";
     }
 
-    public static class Serializer implements RecipeSerializer<TierTwoRecipe> {
+
+    public static class Serializer implements RecipeSerializer<WorkbenchOneRecipe> {
         public static final Serializer INSTANCE = new Serializer();
         public static final ResourceLocation ID =
-                new ResourceLocation(ImprovmentsMod.MOD_ID, "workbench_two_shaped");
+                new ResourceLocation(ImprovmentsMod.MOD_ID, "oneing");
 
         @Override
-        public TierTwoRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
+        public WorkbenchOneRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
             ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "output"));
 
             JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients");
-            NonNullList<Ingredient> inputs = NonNullList.withSize(/*AMOUNT OF INGREDIENTS*/1, Ingredient.EMPTY);
+            NonNullList<Ingredient> inputs = NonNullList.withSize(1, Ingredient.EMPTY);
 
             for (int i = 0; i < inputs.size(); i++) {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
 
-            return new TierTwoRecipe(pRecipeId, output, inputs);
+            return new WorkbenchOneRecipe(pRecipeId, output, inputs);
         }
 
         @Override
-        public @Nullable TierTwoRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
+        public @Nullable WorkbenchOneRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
             NonNullList<Ingredient> inputs = NonNullList.withSize(buf.readInt(), Ingredient.EMPTY);
 
             for (int i = 0; i < inputs.size(); i++) {
@@ -99,10 +102,11 @@ public class TierTwoRecipe implements Recipe<SimpleContainer> {
             }
 
             ItemStack output = buf.readItem();
-            return new TierTwoRecipe(id, output, inputs);
+            return new WorkbenchOneRecipe(id, output, inputs);
         }
+
         @Override
-        public void toNetwork(FriendlyByteBuf buf, TierTwoRecipe recipe) {
+        public void toNetwork(FriendlyByteBuf buf, WorkbenchOneRecipe recipe) {
             buf.writeInt(recipe.getIngredients().size());
 
             for (Ingredient ing : recipe.getIngredients()) {
@@ -111,4 +115,4 @@ public class TierTwoRecipe implements Recipe<SimpleContainer> {
             buf.writeItemStack(recipe.getResultItem(), false);
         }
     }
-    }
+}

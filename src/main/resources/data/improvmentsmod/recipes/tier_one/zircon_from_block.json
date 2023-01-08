@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shapeless",
+  "type": "improvmentsmod:oneing",
   "ingredients": [
     {
       "item": "improvmentsmod:zircon_block"

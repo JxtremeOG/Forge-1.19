@@ -1,7 +1,7 @@
 package net.jxtremeog.improvmentsmod.block.entity;
 
 import net.jxtremeog.improvmentsmod.item.ModItems;
-import net.jxtremeog.improvmentsmod.recipe.TierTwoRecipe;
+import net.jxtremeog.improvmentsmod.recipe.TierOneRecipe;
 import net.jxtremeog.improvmentsmod.screen.TierTwoMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -92,7 +92,7 @@ public class TierTwoBlockEntity extends BlockEntity implements MenuProvider {
         if(cap == ForgeCapabilities.ITEM_HANDLER){
             return lazyItemHandler.cast();
         }
-        
+
         return super.getCapability(cap, side);
     }
     @Override
@@ -128,66 +128,66 @@ public class TierTwoBlockEntity extends BlockEntity implements MenuProvider {
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
-    public static void tick(Level level, BlockPos blockPos, BlockState blockState, TierTwoBlockEntity pEntity) {
-        if(level.isClientSide()) {
-            return;
-        }
-
-        if(hasRecipe(pEntity)) {
-            pEntity.progress++;
-            setChanged(level, blockPos, blockState);
-
-            if(pEntity.progress >= pEntity.maxProgress){
-                craftItem(pEntity);
-            }
-        }else{
-            pEntity.resetProgress();
-            setChanged(level, blockPos, blockState);
-        }
-    }
-    private void resetProgress() {
-        this.progress = 0;
-    }
-
-    private static void craftItem(TierTwoBlockEntity pEntity) {
-        Level level = pEntity.level;
-        SimpleContainer inventory = new SimpleContainer(pEntity.itemHandler.getSlots());
-        for (int i = 0; i < pEntity.itemHandler.getSlots(); i++) {
-            inventory.setItem(i, pEntity.itemHandler.getStackInSlot(i));
-        }
-
-        Optional<TierTwoRecipe> recipe = level.getRecipeManager()
-                .getRecipeFor(TierTwoRecipe.Type.INSTANCE, inventory, level);
-
-        if(hasRecipe(pEntity)) {
-            pEntity.itemHandler.extractItem(4, 1, false);
-            pEntity.itemHandler.setStackInSlot(outputSlotId, new ItemStack(recipe.get().getResultItem().getItem(),
-                    pEntity.itemHandler.getStackInSlot(outputSlotId).getCount() + 1));
-
-            pEntity.resetProgress();
-        }
-    }
-
-    private static boolean hasRecipe(TierTwoBlockEntity entity) {
-        Level level = entity.level;
-        SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());
-        for (int i = 0; i < entity.itemHandler.getSlots(); i++) {
-            inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
-        }
-
-        Optional<TierTwoRecipe> recipe = level.getRecipeManager()
-                .getRecipeFor(TierTwoRecipe.Type.INSTANCE, inventory, level);
-
-        return recipe.isPresent() && canInsertAmountIntoOutputSlot(inventory) &&
-                canInsertItemIntoOutputSlot(inventory, recipe.get().getResultItem());
-    }
-
-    private static boolean canInsertItemIntoOutputSlot(SimpleContainer inventory, ItemStack stack) {
-        return inventory.getItem(outputSlotId).getItem() == stack.getItem() || inventory.getItem(outputSlotId).isEmpty();
-    }
-
-    private static boolean canInsertAmountIntoOutputSlot(SimpleContainer inventory) {
-        return 1 > inventory.getItem(outputSlotId).getCount();
-
-    }
+//    public static void tick(Level level, BlockPos blockPos, BlockState blockState, TierTwoBlockEntity pEntity) {
+//        if(level.isClientSide()) {
+//            return;
+//        }
+//
+//        if(hasRecipe(pEntity)) {
+//            pEntity.progress++;
+//            setChanged(level, blockPos, blockState);
+//
+//            if(pEntity.progress >= pEntity.maxProgress){
+//                craftItem(pEntity);
+//            }
+//        }else{
+//            pEntity.resetProgress();
+//            setChanged(level, blockPos, blockState);
+//        }
+//    }
+//    private void resetProgress() {
+//        this.progress = 0;
+//    }
+//
+//    private static void craftItem(TierTwoBlockEntity pEntity) {
+//        Level level = pEntity.level;
+//        SimpleContainer inventory = new SimpleContainer(pEntity.itemHandler.getSlots());
+//        for (int i = 0; i < pEntity.itemHandler.getSlots(); i++) {
+//            inventory.setItem(i, pEntity.itemHandler.getStackInSlot(i));
+//        }
+//
+//        Optional<TierOneRecipe> recipe = level.getRecipeManager()
+//                .getRecipeFor(TierOneRecipe.Type.WORKBENCH_ONE, inventory, level);
+//
+//        if(hasRecipe(pEntity)) {
+//            pEntity.itemHandler.extractItem(4, 1, false);
+//            pEntity.itemHandler.setStackInSlot(outputSlotId, new ItemStack(recipe.get().getResultItem().getItem(),
+//                    pEntity.itemHandler.getStackInSlot(outputSlotId).getCount() + 1));
+//
+//            pEntity.resetProgress();
+//        }
+//    }
+//
+//    private static boolean hasRecipe(TierTwoBlockEntity entity) {
+//        Level level = entity.level;
+//        SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());
+//        for (int i = 0; i < entity.itemHandler.getSlots(); i++) {
+//            inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
+//        }
+//
+//        Optional<TierOneRecipe> recipe = level.getRecipeManager()
+//                .getRecipeFor(TierOneRecipe.Type.WORKBENCH_ONE, inventory, level);
+//
+//        return recipe.isPresent() && canInsertAmountIntoOutputSlot(inventory) &&
+//                canInsertItemIntoOutputSlot(inventory, recipe.get().getResultItem());
+//    }
+//
+//    private static boolean canInsertItemIntoOutputSlot(SimpleContainer inventory, ItemStack stack) {
+//        return inventory.getItem(outputSlotId).getItem() == stack.getItem() || inventory.getItem(outputSlotId).isEmpty();
+//    }
+//
+//    private static boolean canInsertAmountIntoOutputSlot(SimpleContainer inventory) {
+//        return 1 > inventory.getItem(outputSlotId).getCount();
+//
+//    }
 }

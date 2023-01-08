@@ -2,9 +2,12 @@ package net.jxtremeog.improvmentsmod.screen;
 
 import java.util.Optional;
 
+import net.jxtremeog.improvmentsmod.recipe.TierOneRecipe;
+import net.jxtremeog.improvmentsmod.recipe.WorkbenchOneRecipe;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.StackedContents;
@@ -63,12 +66,13 @@ public class TierOneMenu extends RecipeBookMenu<CraftingContainer> {
             ServerPlayer serverplayer = (ServerPlayer)pPlayer;
             ItemStack itemstack = ItemStack.EMPTY;
             //RECIPE
-            Optional<CraftingRecipe> optional = pLevel.getServer().getRecipeManager().getRecipeFor(RecipeType.CRAFTING, pContainer, pLevel);
+            Optional<WorkbenchOneRecipe> optional = pLevel.getServer().getRecipeManager().getRecipeFor(WorkbenchOneRecipe.Type.INSTANCE, pContainer, pLevel);
+            System.out.println(optional);
             if (optional.isPresent() && (optional.get().getId() + "").contains("tier_one")) {
 
                 System.out.println(optional.get().getId());
 
-                CraftingRecipe craftingrecipe = optional.get();
+                WorkbenchOneRecipe craftingrecipe = optional.get();
                 if (pResult.setRecipeUsed(pLevel, serverplayer, craftingrecipe)) {
                     //RESULT
                     itemstack = craftingrecipe.assemble(pContainer);

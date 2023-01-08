@@ -33,7 +33,7 @@ public class ModBlocks {
             () -> new TierOneBlock(BlockBehaviour.Properties.of(Material.METAL)
                     .strength(6f).requiresCorrectToolForDrops()), ModCreativeModeTab.IMPROVMENTS_TAB);
     public static final RegistryObject<Block> TIERTWO = registerBlock("tiertwo_table",
-            () -> new TierTwoBlock(BlockBehaviour.Properties.of(Material.METAL)
+            () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
                     .strength(6f).requiresCorrectToolForDrops()), ModCreativeModeTab.IMPROVMENTS_TAB);
     //Quartz Ore
     public static final RegistryObject<Block> QUARTZ_ORE = registerBlock("quartz_ore",
