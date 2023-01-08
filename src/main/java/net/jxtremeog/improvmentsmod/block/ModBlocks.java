@@ -1,10 +1,7 @@
 package net.jxtremeog.improvmentsmod.block;
 
 import net.jxtremeog.improvmentsmod.ImprovmentsMod;
-import net.jxtremeog.improvmentsmod.block.custom.RedstoneLampColoredBlock;
-import net.jxtremeog.improvmentsmod.block.custom.TempBlock;
-import net.jxtremeog.improvmentsmod.block.custom.TierOneBlock;
-import net.jxtremeog.improvmentsmod.block.custom.TierTwoBlock;
+import net.jxtremeog.improvmentsmod.block.custom.*;
 import net.jxtremeog.improvmentsmod.fluid.ModFluids;
 import net.jxtremeog.improvmentsmod.fluid.custom.RegenerationFluid;
 import net.jxtremeog.improvmentsmod.item.ModCreativeModeTab;
