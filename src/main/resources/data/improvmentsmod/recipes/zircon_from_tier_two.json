@@ -1,0 +1,11 @@
+{
+  "type": "improvmentsmod:workbench_two_shaped",
+  "ingredients": [
+    {
+      "item": "improvmentsmod:raw_zircon"
+    }
+  ],
+  "output": {
+    "item": "improvmentsmod:zircon"
+  }
+}

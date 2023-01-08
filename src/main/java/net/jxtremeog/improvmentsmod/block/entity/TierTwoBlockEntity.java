@@ -1,6 +1,7 @@
 package net.jxtremeog.improvmentsmod.block.entity;
 
 import net.jxtremeog.improvmentsmod.item.ModItems;
+import net.jxtremeog.improvmentsmod.recipe.TierTwoRecipe;
 import net.jxtremeog.improvmentsmod.screen.TierTwoMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -27,6 +28,8 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 public class TierTwoBlockEntity extends BlockEntity implements MenuProvider {
     public static final int numberOfSlots = 10;
@@ -147,10 +150,18 @@ public class TierTwoBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private static void craftItem(TierTwoBlockEntity pEntity) {
+        Level level = pEntity.level;
+        SimpleContainer inventory = new SimpleContainer(pEntity.itemHandler.getSlots());
+        for (int i = 0; i < pEntity.itemHandler.getSlots(); i++) {
+            inventory.setItem(i, pEntity.itemHandler.getStackInSlot(i));
+        }
+
+        Optional<TierTwoRecipe> recipe = level.getRecipeManager()
+                .getRecipeFor(TierTwoRecipe.Type.INSTANCE, inventory, level);
 
         if(hasRecipe(pEntity)) {
             pEntity.itemHandler.extractItem(4, 1, false);
-            pEntity.itemHandler.setStackInSlot(outputSlotId, new ItemStack(ModItems.ZIRCON.get(),
+            pEntity.itemHandler.setStackInSlot(outputSlotId, new ItemStack(recipe.get().getResultItem().getItem(),
                     pEntity.itemHandler.getStackInSlot(outputSlotId).getCount() + 1));
 
             pEntity.resetProgress();
@@ -158,15 +169,17 @@ public class TierTwoBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private static boolean hasRecipe(TierTwoBlockEntity entity) {
+        Level level = entity.level;
         SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());
         for (int i = 0; i < entity.itemHandler.getSlots(); i++) {
             inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
         }
 
-        boolean hasRawGemInFirstSlot = entity.itemHandler.getStackInSlot(4).getItem() == ModItems.RAW_ZIRCON.get();
+        Optional<TierTwoRecipe> recipe = level.getRecipeManager()
+                .getRecipeFor(TierTwoRecipe.Type.INSTANCE, inventory, level);
 
-        return hasRawGemInFirstSlot && canInsertAmountIntoOutputSlot(inventory) &&
-                canInsertItemIntoOutputSlot(inventory, new ItemStack(ModItems.ZIRCON.get(), 1));
+        return recipe.isPresent() && canInsertAmountIntoOutputSlot(inventory) &&
+                canInsertItemIntoOutputSlot(inventory, recipe.get().getResultItem());
     }
 
     private static boolean canInsertItemIntoOutputSlot(SimpleContainer inventory, ItemStack stack) {

@@ -25,7 +25,7 @@
                   }
                 }
               ],
-              "name": "improvmentsmod:nether_copper_ore"
+              "name": "minecraft:raw_copper"
             },
             {
               "type": "minecraft:item",

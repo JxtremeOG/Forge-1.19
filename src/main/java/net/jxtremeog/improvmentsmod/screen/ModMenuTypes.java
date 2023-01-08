@@ -16,8 +16,6 @@ public class ModMenuTypes {
 
     public static final RegistryObject<MenuType<TempMenu>> TEMP_MENU =
             registerMenuType(TempMenu::new, "temp_menu");
-    public static final RegistryObject<MenuType<TierOneMenu>> TIERONE_MENU =
-            registerMenuType(TierOneMenu::new, "tierone_menu");
     public static final RegistryObject<MenuType<TierTwoMenu>> TIERTWO_MENU =
             registerMenuType(TierTwoMenu::new, "tiertwo_menu");
 

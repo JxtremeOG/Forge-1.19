@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -72,7 +73,7 @@ import org.jetbrains.annotations.Nullable;
             if (!pLevel.isClientSide()) {
                 BlockEntity entity = pLevel.getBlockEntity(pPos);
                 if(entity instanceof TierOneBlockEntity) {
-                    NetworkHooks.openScreen(((ServerPlayer)pPlayer), (TierOneBlockEntity)entity, pPos);
+                    NetworkHooks.openScreen(((ServerPlayer)pPlayer), (MenuProvider) entity, pPos);
                 } else {
                     throw new IllegalStateException("Our Container provider is missing!");
                 }

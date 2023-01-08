@@ -3,10 +3,9 @@ package net.jxtremeog.improvmentsmod.screen;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.CraftingMenu;
 import net.minecraft.world.level.block.Block;
 
-public class CraftingScreen extends CraftingMenu {
+public class CraftingScreen extends CraftingMenu2 {
     private final Block workbench;
     private final ContainerLevelAccess worldPos;
 

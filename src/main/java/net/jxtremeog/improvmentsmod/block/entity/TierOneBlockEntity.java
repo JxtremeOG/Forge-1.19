@@ -1,7 +1,6 @@
 package net.jxtremeog.improvmentsmod.block.entity;
 
 import net.jxtremeog.improvmentsmod.item.ModItems;
-import net.jxtremeog.improvmentsmod.screen.TierOneMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -13,6 +12,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.CraftingMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -25,7 +25,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class TierOneBlockEntity extends BlockEntity implements MenuProvider {
+public class TierOneBlockEntity extends BlockEntity {
     private final ItemStackHandler itemHandler = new ItemStackHandler(10) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -64,17 +64,6 @@ public class TierOneBlockEntity extends BlockEntity implements MenuProvider {
                 return 9;
             }
         };
-    }
-
-    @Override
-    public Component getDisplayName() {
-        return Component.literal("Workbench");
-    }
-
-    @Nullable
-    @Override
-    public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-        return new TierOneMenu(id, inventory, this, this.data);
     }
 
     @Override

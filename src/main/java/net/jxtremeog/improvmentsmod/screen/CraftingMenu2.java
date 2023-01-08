@@ -2,7 +2,6 @@ package net.jxtremeog.improvmentsmod.screen;
 
 import java.util.Optional;
 
-import net.jxtremeog.improvmentsmod.block.entity.CraftingBlockEntity;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
@@ -16,7 +15,6 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class CraftingMenu2 extends RecipeBookMenu<CraftingContainer> {
     public static final int RESULT_SLOT = 0;
@@ -31,61 +29,48 @@ public class CraftingMenu2 extends RecipeBookMenu<CraftingContainer> {
     private final ContainerLevelAccess access;
     private final Player player;
 
-    //MY VARIABLES
-    public final CraftingBlockEntity blockEntity;
-    private final Level level;
-    private final ContainerData data;
-
-    public CraftingMenu2(int id, Inventory inv, BlockEntity entity, ContainerData data) {
-        this(id, inv, ContainerLevelAccess.NULL, entity, data);
+    public CraftingMenu2(int pContainerId, Inventory pPlayerInventory) {
+        this(pContainerId, pPlayerInventory, ContainerLevelAccess.NULL);
     }
 
-    public CraftingMenu2(int pContainerId, Inventory inv, ContainerLevelAccess pAccess, BlockEntity entity, ContainerData data) {
+    public CraftingMenu2(int pContainerId, Inventory pPlayerInventory, ContainerLevelAccess pAccess) {
         super(MenuType.CRAFTING, pContainerId);
         this.access = pAccess;
-        this.player = inv.player;
-        blockEntity = (CraftingBlockEntity) entity;
-        this.level = inv.player.level;
-        this.data = data;
+        this.player = pPlayerInventory.player;
+        this.addSlot(new ResultSlot(pPlayerInventory.player, this.craftSlots, this.resultSlots, 0, 124, 35));
 
-        //OUTPUT
-        this.addSlot(new ResultSlot(inv.player, this.craftSlots, this.resultSlots, 0, 124, 35));
-
-        //CRAFTING GRID
         for(int i = 0; i < 3; ++i) {
             for(int j = 0; j < 3; ++j) {
                 this.addSlot(new Slot(this.craftSlots, j + i * 3, 30 + j * 18, 17 + i * 18));
             }
         }
 
-        addPlayerInventory(inv);
-
-        addPlayerHotbar(inv);
-
-    }
-
-    private void addPlayerInventory(Inventory playerInventory) {
-        for (int i = 0; i < 3; ++i) {
-            for (int l = 0; l < 9; ++l) {
-                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 86 + i * 18));
+        for(int k = 0; k < 3; ++k) {
+            for(int i1 = 0; i1 < 9; ++i1) {
+                this.addSlot(new Slot(pPlayerInventory, i1 + k * 9 + 9, 8 + i1 * 18, 84 + k * 18));
             }
         }
-    }
 
-    private void addPlayerHotbar(Inventory playerInventory) {
-        for (int i = 0; i < 9; ++i) {
-            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 144));
+        for(int l = 0; l < 9; ++l) {
+            this.addSlot(new Slot(pPlayerInventory, l, 8 + l * 18, 142));
         }
+
     }
 
+    //CRAFTING
     protected static void slotChangedCraftingGrid(AbstractContainerMenu pMenu, Level pLevel, Player pPlayer, CraftingContainer pContainer, ResultContainer pResult) {
         if (!pLevel.isClientSide) {
             ServerPlayer serverplayer = (ServerPlayer)pPlayer;
             ItemStack itemstack = ItemStack.EMPTY;
+            //RECIPE
             Optional<CraftingRecipe> optional = pLevel.getServer().getRecipeManager().getRecipeFor(RecipeType.CRAFTING, pContainer, pLevel);
-            if (optional.isPresent()) {
+            if (optional.isPresent() && (optional.get().getId() + "").contains("tier_one")) {
+
+                System.out.println(optional.get().getId());
+
                 CraftingRecipe craftingrecipe = optional.get();
                 if (pResult.setRecipeUsed(pLevel, serverplayer, craftingrecipe)) {
+                    //RESULT
                     itemstack = craftingrecipe.assemble(pContainer);
                 }
             }
@@ -114,6 +99,7 @@ public class CraftingMenu2 extends RecipeBookMenu<CraftingContainer> {
         this.resultSlots.clearContent();
     }
 
+    //CHECKS WITH BOOK NOT RELAVENT
     public boolean recipeMatches(Recipe<? super CraftingContainer> pRecipe) {
         return pRecipe.matches(this.craftSlots, this.player.level);
     }
@@ -212,24 +198,11 @@ public class CraftingMenu2 extends RecipeBookMenu<CraftingContainer> {
     }
 
     public RecipeBookType getRecipeBookType() {
+        System.out.println("getRecipeBookType "+RecipeBookType.CRAFTING);
         return RecipeBookType.CRAFTING;
     }
 
     public boolean shouldMoveToInventory(int pSlotIndex) {
         return pSlotIndex != this.getResultSlotIndex();
     }
-
-    //ADDED
-    public boolean isCrafting() {
-        return data.get(0) > 0;
-    }
-
-    public int getScaledProgress() {
-        int progress = this.data.get(0);
-        int maxProgress = this.data.get(1);  // Max Progress
-        int progressArrowSize = 26; // This is the height in pixels of your arrow
-
-        return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
-    }
-
 }

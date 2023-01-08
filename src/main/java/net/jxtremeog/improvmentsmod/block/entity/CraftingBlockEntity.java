@@ -1,8 +1,6 @@
 package net.jxtremeog.improvmentsmod.block.entity;
 
 import net.jxtremeog.improvmentsmod.item.ModItems;
-import net.jxtremeog.improvmentsmod.screen.CraftingMenu2;
-import net.jxtremeog.improvmentsmod.screen.TierTwoMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -13,7 +11,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.inventory.CraftingMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -26,7 +23,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class CraftingBlockEntity extends BlockEntity implements MenuProvider{
+public class CraftingBlockEntity extends BlockEntity{
     public static final int numberOfSlots = 10;
     public static final int outputSlotId = 9;
     private final ItemStackHandler itemHandler = new ItemStackHandler(numberOfSlots){
@@ -72,16 +69,16 @@ public class CraftingBlockEntity extends BlockEntity implements MenuProvider{
 
     //THIS IS WHAT MIGHT BREAK
 
-    @Override
-    public Component getDisplayName() {
-        return Component.literal("Tier One Workbench");
-    }
-
-    @Nullable
-    @Override
-    public AbstractContainerMenu createMenu(int id, Inventory pPlayerInventory, Player pPlayer) {
-        return new CraftingMenu2(id, pPlayerInventory, this, this.data);
-    }
+//    @Override
+//    public Component getDisplayName() {
+//        return Component.literal("Tier One Workbench");
+//    }
+//
+//    @Nullable
+//    @Override
+//    public AbstractContainerMenu createMenu(int id, Inventory pPlayerInventory, Player pPlayer) {
+//        return new CraftingMenu2(id, pPlayerInventory, this, this.data);
+//    }
 
 
 
@@ -123,8 +120,6 @@ public class CraftingBlockEntity extends BlockEntity implements MenuProvider{
         if(level.isClientSide()) {
             return;
         }
-        System.out.println(hasRecipe(pEntity));
-        System.out.println(pEntity.itemHandler.getStackInSlot(4));
 
         if(hasRecipe(pEntity)) {
             pEntity.progress++;

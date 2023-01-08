@@ -9,7 +9,6 @@ import net.jxtremeog.improvmentsmod.block.ModBlocks;
 import net.jxtremeog.improvmentsmod.recipe.ModRecipes;
 import net.jxtremeog.improvmentsmod.screen.ModMenuTypes;
 import net.jxtremeog.improvmentsmod.screen.TempScreen;
-import net.jxtremeog.improvmentsmod.screen.TierOneScreen;
 import net.jxtremeog.improvmentsmod.screen.TierTwoScreen;
 import net.jxtremeog.improvmentsmod.villager.ModVillagers;
 import net.jxtremeog.improvmentsmod.world.feature.ModConfiguredFeatures;
@@ -73,7 +72,6 @@ public class ImprovmentsMod
             ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_REGENERATION.get(), RenderType.translucent());
 
             MenuScreens.register(ModMenuTypes.TEMP_MENU.get(), TempScreen::new);
-            MenuScreens.register(ModMenuTypes.TIERONE_MENU.get(), TierOneScreen::new);
             MenuScreens.register(ModMenuTypes.TIERTWO_MENU.get(), TierTwoScreen::new);
         }
     }

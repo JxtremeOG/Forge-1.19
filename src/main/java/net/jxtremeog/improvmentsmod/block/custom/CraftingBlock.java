@@ -63,9 +63,9 @@ public class CraftingBlock extends BaseEntityBlock {
         super(properties);
     }
 
-//    public MenuProvider getMenuProvider(BlockState state, Level worldIn, BlockPos pos) {
-//        return new SimpleMenuProvider((id, inventory, entity) -> new CraftingScreen(id, inventory, ContainerLevelAccess.create((Level)worldIn, (BlockPos)pos), (Block)this), GUI_TITLE);
-//    }
+    public MenuProvider getMenuProvider(BlockState state, Level worldIn, BlockPos pos) {
+        return new SimpleMenuProvider((id, inventory, entity) -> new CraftingScreen(id, inventory, ContainerLevelAccess.create((Level)worldIn, (BlockPos)pos), (Block)this), GUI_TITLE);
+    }
 
     @Nullable
     @Override
