@@ -35,6 +35,13 @@ public class TierOneMenu extends AbstractContainerMenu {
             this.addSlot(new SlotItemHandler(handler, 0, 30, 17));
             this.addSlot(new SlotItemHandler(handler, 1, 48, 17));
             this.addSlot(new SlotItemHandler(handler, 2, 66, 17));
+            this.addSlot(new SlotItemHandler(handler, 3, 30, 35));
+            this.addSlot(new SlotItemHandler(handler, 4, 48, 35));
+            this.addSlot(new SlotItemHandler(handler, 5, 66, 35));
+            this.addSlot(new SlotItemHandler(handler, 6, 30, 53));
+            this.addSlot(new SlotItemHandler(handler, 7, 48, 53));
+            this.addSlot(new SlotItemHandler(handler, 8, 66, 53));
+            this.addSlot(new SlotItemHandler(handler, 9, 124, 35));
 
 
         });
@@ -70,7 +77,7 @@ public class TierOneMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 3;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 10;  // must be the number of slots you have!
 
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {
